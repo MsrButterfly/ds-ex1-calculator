@@ -6,7 +6,7 @@
  *             Usage: g++ -std=c++11 calculator.cpp -o calculator.exe
  *             *-std=c++11 is an importent switch.
  *             *It will generate some warnings, please ignore it.
- *             I haven't use any IDE, so there is no other files, please compile by yourself.
+ *             I haven't used any IDE, so there is no other files, please compile by yourself.
  *  @author    Darren Liu (MSR.B, msr-b)
  *  @date      2013/10/10
  *  @copyright Copyright (c) 2013 Darren Liu. All rights reserved.

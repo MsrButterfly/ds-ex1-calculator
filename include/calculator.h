@@ -14,7 +14,7 @@
 #include <cstring>
 /// @brief   for using pow()
 #include <cmath>
-/// @brief   my string categoty, includes strtrm() for trim ' ' & '\t' and strrpl(n)() for replace (4 overloads)
+/// @brief   my string categoty, includes strtrm() for trimming strings and strrpl(n)() for replacing chars (4 overloads)
 #include "string-category.h"
 /// @brief   my range class for packaging few features
 #include "range.h"
