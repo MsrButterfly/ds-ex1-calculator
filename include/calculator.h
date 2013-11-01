@@ -43,10 +43,11 @@ public:
 	 */
 	bool calculate(const char* str, char*& correctFormula, double* result) {
 		char* formula = new char[strlen(str) + 1];  // create a duplicate for str
+		char* error = new char[100];
 		strcpy(formula, str);		
 		removeIllogicalChars(formula);              // remove illogical chars, check syntax
-		if (!checkSyntax(formula)) {
-			std::cout << "Syntax error." << std::endl;
+		if (!checkSyntax(formula, error)) {
+			std::cout << "Syntax error: " << error << std::endl;
 			return false;                           // if syntax error occured, return false
 		}
 		correctFormula = new char[strlen(formula) + 1];
@@ -108,6 +109,8 @@ public:
 							nmbr.pop();                  // pop number 1
 							if (op1 == '/' && b == 0) {
 								std::cout << "Can not divided by 0." << std::endl;
+								delete formula;          // don't forget to release!
+								delete error;
 								return false;
 							}
 							nmbr.push(execute(a, op1, b));   // caculate 1 left 2
@@ -131,6 +134,7 @@ public:
 			nmbr.pop();
 		}
 		delete formula;    // don't forget to release!
+		delete error;
 		return true;       // calculate succeeded.
 	}
 private:
@@ -189,7 +193,7 @@ private:
 	 * @retval true    no error found
 	 * @retval false   error found
 	 */
-	static bool checkSyntax(const char* formula) {
+	static bool checkSyntax(const char* formula, char*& error) {
 		int i, l, layer;
 		bool num;
 		l = strlen(formula);
@@ -200,9 +204,11 @@ private:
 				layer++; // into a layer
 				if (i > 0 && (numberList.in(formula[i - 1]) || formula[i - 1] == ')')) {
 				// the char at the left side of '(' can not be digital or '.' or ')'
+					error = "perators not found between brackets.";
 					return false;
 				} else if (i < l - 1 && operatorList.in(formula[i + 1])) {
 				// the char at the right side of '(' can not be operator
+					error = "illogical operator found.";
 					return false;
 				}
 			} else if (formula[i] == ')') {
@@ -210,18 +216,22 @@ private:
 				layer--; // escape a layer
 				if (layer < 0) {
 				// '(' must at the front of ')'
+					error = "brackets did not match.";
 					return false;
 				} else if (i + 1 < l && (numberList.in(formula[i + 1]) || formula[i + 1] == '(')) {
 				// the char at the right side of ')' can not be digital or '.' or '('
+					error = "operators not found between brackets.";
 					return false;
 				} else if (i > 0 && operatorList.in(formula[i - 1])) {
 				// the char at the left side of ')' can not be operator
+					error = "illogical operator found.";
 					return false;
 				}
 			} else if (operatorList.in(formula[i])) {
 				// can not have two consecutive operator
 				// include *((()))*
 				if (!num) {
+					error = "continuous operators found.";
 					return false;
 				}
 				num = false;
@@ -230,10 +240,12 @@ private:
 			}
 		}
 		if (!num) {
+			error = "no more number after the last operator.";
 			return false;
 		}
 		if (layer) {
 		// if brackets are not matching
+			error = "brackets did not match.";
 			return false;
 		}
 		return true;
@@ -263,9 +275,10 @@ private:
 	 * @retval 1        -
 	 * @retval 2        *
 	 * @retval 3        /
-	 * @retval 4        (
-	 * @retval 5        )
-	 * @retval 6        #
+	 * @retval 4        ^
+	 * @retval 5        (
+	 * @retval 6        )
+	 * @retval 7        #
 	 * @retval (exit)   others
 	 */
 	static int oprtNum(const char& oprt) {
@@ -279,12 +292,14 @@ private:
 				return 2;
 			case '/':
 				return 3;
-			case '(':
+			case '^':
 				return 4;
-			case ')':
+			case '(':
 				return 5;
-			case '#':
+			case ')':
 				return 6;
+			case '#':
+				return 7;
 			default:
 				std::cerr << "Unknown operator" << std::endl;
 				exit(EXIT_FAILURE);
@@ -309,6 +324,8 @@ private:
 				return a * b;
 			case '/':
 				return a / b;
+			case '^':
+				return pow(a, b);
 			default:
 				std::cerr << "Unknown operator" << std::endl;
 				exit(EXIT_FAILURE);
@@ -317,9 +334,9 @@ private:
 	/// @name priority_variables
 	/// @{
 	/// @brief  priority of left operator
-	static int lop[7];
+	static int lop[8];
 	/// @brief  priority of right operator
-	static int rop[7];
+	static int rop[8];
 	/// @}
 	/// @name lists
 	/// @{
@@ -338,12 +355,12 @@ private:
 
 /// @name inits
 /// @{
-int                Calculator::lop[7]           = {3, 3, 5, 5, 1, 6, 0};
-int                Calculator::rop[7]           = {2, 2, 4, 4, 6, 1, 0};
+int                Calculator::lop[8]           = {3, 3, 5, 5, 7, 1, 8, 0};
+int                Calculator::rop[8]           = {2, 2, 4, 4, 6, 8, 1, 0};
 
 // init chars list
-SequenceList<char> Calculator::operatorList     = {'+', '-', '*', '/',
-                                                                  '\0'};
+SequenceList<char> Calculator::operatorList     = {'+', '-', '*', '/', '^',
+                                                                       '\0'};
 
 SequenceList<char> Calculator::leftBracketList  = {'(', '[', '{', '<',
 	                                                              '\0'};
@@ -367,7 +384,7 @@ SequenceList<char> Calculator::numberList       = {'.', '0', '1', '2',
                                                    '3', '4', '5', '6',
                                                    '7', '8', '9', '\0'};
 
-SequenceList<char> Calculator::availableList    = {'+', '-', '*', '/',
+SequenceList<char> Calculator::availableList    = {'+', '-', '*', '/', '^',
                                                    '(', '[', '{', '<',
                                                    ')', ']', '}', '>',
                                                    '.', '0', '1', '2',
