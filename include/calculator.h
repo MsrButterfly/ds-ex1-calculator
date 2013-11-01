@@ -14,7 +14,7 @@
 #include <cstring>
 /// @brief   for using pow()
 #include <cmath>
-/// @brief   my string categoty, includes strtrm() for trimming strings and strrpl(n)() for replacing chars (4 overloads)
+/// @brief   my string category, includes strtrm() for trimming strings and strrpl(n)() for replacing chars (4 overloads)
 #include "string-category.h"
 /// @brief   my range class for packaging few features
 #include "range.h"
@@ -187,10 +187,11 @@ private:
 	/**
 	 * @brief  check syntax of the formula
 	 * 
-	 * @param  formula (const char*) the formula
+	 * @param  formula (const char*)  the formula
+	 * @param  error   (char*& error) error returning string
 	 * 
 	 * @return bool
-	 * @retval true    no error found
+	 * @retval true    error not found
 	 * @retval false   error found
 	 */
 	static bool checkSyntax(const char* formula, char*& error) {
@@ -368,7 +369,7 @@ SequenceList<char> Calculator::leftBracketList  = {'(', '[', '{', '<',
 SequenceList<char> Calculator::rightBracketList = {')', ']', '}', '>',
                                                                   '\0'};
 
-// i have a smarter implementation of these two list,
+// i have a smarter implementation of these two lists,
 // but i can't place it on the outside of functions
 // so i want to show it below
 //
