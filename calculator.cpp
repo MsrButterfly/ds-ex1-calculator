@@ -17,7 +17,7 @@
 
 #include <iostream>
 #ifdef __DEBUG__
-	#include <fstream>
+#include <fstream>
 #endif
 #include "include/calculator.h"
 
@@ -26,19 +26,19 @@
  *  @param argc  number of console parameters
  *  @param argv  console parameter strings
  */
-int main(int argc, char const *argv[]) {
+int main (int argc, char const *argv[]) {
 	char formula[1000];    // formula string
-	char* correctFormula;  // pointer for receiving correct formula
+	char *correctFormula;  // pointer for receiving correct formula
 	double result;         // variable for receiving result
 	Calculator c;          // calculator for calculating
-	#ifdef __DEBUG__       // debug switch, redirect input to file(calculater.in)
-		std::ifstream fin("calculator.in");
-		std::cin.rdbuf(fin.rdbuf());
-	#endif
-	while (std::cin.getline(formula, 999)) {
+#ifdef __DEBUG__       // debug switch, redirect input to file(calculater.in)
+	std::ifstream fin ("calculator.in");
+	std::cin.rdbuf (fin.rdbuf());
+#endif
+	while (std::cin.getline (formula, 999)) {
 		// std::cout << "formula: " << formula << std::endl;  // print original formula
-		if (c.calculate(formula, correctFormula, &result)) {
-		// if calculate succeeded
+		if (c.calculate (formula, correctFormula, &result)) {
+			// if calculate succeeded
 			std::cout << correctFormula << " = " << result << std::endl;
 		}
 		// an extra line for segmentation

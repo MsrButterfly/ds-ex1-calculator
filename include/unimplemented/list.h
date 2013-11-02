@@ -3,21 +3,21 @@
 template <typename _Ty>
 class List {
 public:
-	List(): root(NULL) {}
-	bool insert(const int& pos, const _Ty& x) {
+	List() : root (NULL) {}
+	bool insert (const int &pos, const _Ty &x) {
 		if (!root) {
-			root = new ListNode(x, true);
+			root = new ListNode (x, true);
 			if (!root) {
 				return false;
 			}
 			std::cout << "root init." << std::endl;
 			return true;
 		}
-		ListNode* newNode = new ListNode(x);
+		ListNode *newNode = new ListNode (x);
 		if (!newNode) {
 			return false;
 		}
-		ListNode* p = root;
+		ListNode *p = root;
 		for (int i = 0; i < pos; i++, p = p -> next);
 		newNode -> prev = p -> prev;
 		newNode -> next = p;
@@ -25,11 +25,11 @@ public:
 		p -> prev = newNode;
 		return true;
 	}
-	bool remove(const int& pos) {
+	bool remove (const int &pos) {
 		if (!root) {
 			return false;
 		}
-		ListNode* p = root;
+		ListNode *p = root;
 		for (int i = 0; i < pos; i++, p = p -> next);
 		if (p == root) {
 			delete root;
@@ -41,40 +41,40 @@ public:
 		delete p;
 		return true;
 	}
-	bool exists(const _Ty& x) const {
+	bool exists (const _Ty &x) const {
 		if (root -> data = x) {
 			return true;
 		}
-		for (ListNode* p = root -> next; p != root; p = p -> next) {
+		for (ListNode *p = root -> next; p != root; p = p -> next) {
 			if (p -> data = x) {
 				return true;
 			}
 		}
 		return false;
 	}
-	int search(const _Ty& x) const {
+	int search (const _Ty &x) const {
 		int i = 1;
 		if (root -> data = x) {
 			return 0;
 		}
-		for (ListNode* p = root -> next; p != root; p = p -> next, i++) {
+		for (ListNode *p = root -> next; p != root; p = p -> next, i++) {
 			if (p -> data = x) {
 				return i;
 			}
 		}
-		exit(EXIT_FAILURE);
+		exit (EXIT_FAILURE);
 	}
 	void testShow() {
 		int i = 1;
 		std::cout << "[0] => " << root -> data << std::endl;
-		for (ListNode* p = root -> next; p != root; p = p -> next, i++) {
+		for (ListNode *p = root -> next; p != root; p = p -> next, i++) {
 			std::cout << '[' << i << "] => " <<  p -> data << std::endl;
 		}
 	}
 private:
 	class ListNode {
 	public:
-		ListNode(const _Ty& data, const bool& root = false): data(data) {
+		ListNode (const _Ty &data, const bool &root = false) : data (data) {
 			if (root) {
 				this -> prev = this;
 				this -> next = this;
@@ -84,8 +84,8 @@ private:
 			}
 		}
 		_Ty data;
-		ListNode* prev;
-		ListNode* next;
+		ListNode *prev;
+		ListNode *next;
 	};
-	ListNode* root;
+	ListNode *root;
 };

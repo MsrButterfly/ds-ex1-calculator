@@ -14,17 +14,17 @@
 
 /**
  *  @brief  replace charactors in specific range
- * 
+ *
  *  @param  str   (char*) string
  *  @param  range (Range<char>) charactor range
  *  @param  to    (char) replace to
- *  
+ *
  *  @return amount of charactors replaced
  */
-int strrpl(char* str, Range<char> range, char to) {
-	int i, n = 0, l = strlen(str);
+int strrpl (char *str, Range<char> range, char to) {
+	int i, n = 0, l = strlen (str);
 	for (i = 0; i < l; i++) {
-		if (range.in(str[i])) {
+		if (range.in (str[i])) {
 			str[i] = to;
 			n++;
 		}
@@ -34,17 +34,17 @@ int strrpl(char* str, Range<char> range, char to) {
 
 /**
  *  @brief  replace charactors in specific list
- * 
+ *
  *  @param  str  (char*) string
  *  @param  list (SequenceList<char>) charactor list
  *  @param  to   (char) replace to
- * 
+ *
  *  @return amount of charactors replaced
  */
-int strrpl(char* str, SequenceList<char> list, char to) {
-	int i, n = 0, l = strlen(str);
+int strrpl (char *str, SequenceList<char> list, char to) {
+	int i, n = 0, l = strlen (str);
 	for (i = 0; i < l; i++) {
-		if (list.in(str[i])) {
+		if (list.in (str[i])) {
 			str[i] = to;
 		}
 	}
@@ -53,17 +53,17 @@ int strrpl(char* str, SequenceList<char> list, char to) {
 
 /**
  *  @brief  replace charactors *not* in specific range
- * 
+ *
  *  @param  str   (char*) string
  *  @param  range (Range<char>) charactor range
  *  @param  to    (char) replace to
- *  
+ *
  *  @return amount of charactors replaced
  */
-int strrpln(char* str, Range<char> range, char to) {
-	int i, n = 0, l = strlen(str);
+int strrpln (char *str, Range<char> range, char to) {
+	int i, n = 0, l = strlen (str);
 	for (i = 0; i < l; i++) {
-		if (!range.in(str[i])) {
+		if (!range.in (str[i])) {
 			str[i] = to;
 			n++;
 		}
@@ -73,17 +73,17 @@ int strrpln(char* str, Range<char> range, char to) {
 
 /**
  *  @brief  replace charactors *not* in specific list
- * 
+ *
  *  @param  str  (char*) string
  *  @param  list (SequenceList<char>) charactor list
  *  @param  to   (char) replace to
- * 
+ *
  *  @return amount of charactors replaced
  */
-int strrpln(char* str, SequenceList<char> list, char to) {
-	int i, n = 0, l = strlen(str);
+int strrpln (char *str, SequenceList<char> list, char to) {
+	int i, n = 0, l = strlen (str);
 	for (i = 0; i < l; i++) {
-		if (!list.in(str[i])) {
+		if (!list.in (str[i])) {
 			str[i] = to;
 		}
 	}
@@ -92,17 +92,17 @@ int strrpln(char* str, SequenceList<char> list, char to) {
 
 /**
  *  @brief  remove spaces and tabs in string
- * 
+ *
  *  @param  str  (char*) string
- * 
+ *
  *  @return amount of charactors deleted
  */
-int strtrm(char* str) {
-	char* p;
+int strtrm (char *str) {
+	char *p;
 	int n = 0;
 	for (p = str; *str != '\0'; str++) {
 		if (*str != ' ' && *str != '\t') {
-			*(p++) = *str;
+			* (p++) = *str;
 		} else {
 			n++;
 		}

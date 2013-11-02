@@ -2,8 +2,8 @@
 #define _TYPE_H_
 #include <typeinfo>
 template <typename _Ty>
-const char* typeName(const _Ty& x) {
-	return typeid(x).name();
+const char *typeName (const _Ty &x) {
+	return typeid (x).name();
 }
 
 // object function
