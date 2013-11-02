@@ -205,11 +205,11 @@ private:
 				layer++; // into a layer
 				if (i > 0 && (numberList.in (formula[i - 1]) || formula[i - 1] == ')')) {
 					// the char at the left side of '(' can not be digital or '.' or ')'
-					error = "perators not found between brackets.";
+					error = (char *) ("perators not found between brackets.");
 					return false;
 				} else if (i < l - 1 && operatorList.in (formula[i + 1])) {
 					// the char at the right side of '(' can not be operator
-					error = "illogical operator found.";
+					error = (char *) "illogical operator found.";
 					return false;
 				}
 			} else if (formula[i] == ')') {
@@ -217,22 +217,22 @@ private:
 				layer--; // escape a layer
 				if (layer < 0) {
 					// '(' must at the front of ')'
-					error = "brackets did not match.";
+					error = (char *) "brackets did not match.";
 					return false;
 				} else if (i + 1 < l && (numberList.in (formula[i + 1]) || formula[i + 1] == '(')) {
 					// the char at the right side of ')' can not be digital or '.' or '('
-					error = "operators not found between brackets.";
+					error = (char *) "operators not found between brackets.";
 					return false;
 				} else if (i > 0 && operatorList.in (formula[i - 1])) {
 					// the char at the left side of ')' can not be operator
-					error = "illogical operator found.";
+					error = (char *) "illogical operator found.";
 					return false;
 				}
 			} else if (operatorList.in (formula[i])) {
 				// can not have two consecutive operator
 				// include *((()))*
 				if (!num) {
-					error = "continuous operators found.";
+					error = (char *) "continuous operators found.";
 					return false;
 				}
 				num = false;
@@ -241,12 +241,12 @@ private:
 			}
 		}
 		if (!num) {
-			error = "no more number after the last operator.";
+			error = (char *) "no more number after the last operator.";
 			return false;
 		}
 		if (layer) {
 			// if brackets are not matching
-			error = "brackets did not match.";
+			error = (char *) "brackets did not match.";
 			return false;
 		}
 		return true;
