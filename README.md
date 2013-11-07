@@ -1,7 +1,9 @@
-Data Structure - Experiment 1 - Calculator
+ds-ex1-calculator
 =============
 
 Program for data structure experiment.
+
+Data Structure Experiment 1 - Calculator
 
 Tested under g++ (4.8.1) and clang (sorry for forgetting the version...).
 
