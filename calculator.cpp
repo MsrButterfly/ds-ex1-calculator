@@ -13,7 +13,7 @@
  */
 
 /// @brief Debug switch, will enable file input
-// #define __DEBUG__
+#define __DEBUG__
 
 #include <iostream>
 #ifdef __DEBUG__
@@ -26,22 +26,22 @@
  *  @param argc  number of console parameters
  *  @param argv  console parameter strings
  */
-int main (int argc, char const *argv[]) {
-	char formula[1000];    // formula string
-	char *correctFormula;  // pointer for receiving correct formula
-	double result;         // variable for receiving result
-	Calculator c;          // calculator for calculating
+int main(int argc, char const *argv[]) {
+    char formula[1000];    // formula string
+    char *correctFormula;  // pointer for receiving correct formula
+    double result;         // variable for receiving result
+    Calculator c;          // calculator for calculating
 #ifdef __DEBUG__       // debug switch, redirect input to file(calculater.in)
-	std::ifstream fin ("calculator.in");
-	std::cin.rdbuf (fin.rdbuf());
+    std::ifstream fin("calculator.in");
+    std::cin.rdbuf(fin.rdbuf());
 #endif
-	while (std::cin.getline (formula, 999)) {
-		// std::cout << "formula: " << formula << std::endl;  // print original formula
-		if (c.calculate (formula, correctFormula, &result)) {
-			// if calculate succeeded
-			std::cout << correctFormula << " = " << result << std::endl;
-		}
-		// an extra line for segmentation
-	}
-	return 0;
+    while (std::cin.getline(formula, 999)) {
+        // std::cout << "formula: " << formula << std::endl;  // print original formula
+        if (c.calculate(formula, correctFormula, &result)) {
+            // if calculate succeeded
+            std::cout << correctFormula << "=" << result << std::endl;
+        }
+        // an extra line for segmentation
+    }
+    return 0;
 }

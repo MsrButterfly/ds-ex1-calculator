@@ -21,15 +21,15 @@
  *
  *  @return amount of charactors replaced
  */
-int strrpl (char *str, Range<char> range, char to) {
-	int i, n = 0, l = strlen (str);
-	for (i = 0; i < l; i++) {
-		if (range.in (str[i])) {
-			str[i] = to;
-			n++;
-		}
-	}
-	return n;
+int strrpl(char *str, Range<char> range, char to) {
+    int i, n = 0, l = strlen(str);
+    for (i = 0; i < l; i++) {
+        if (range.in(str[i])) {
+            str[i] = to;
+            n++;
+        }
+    }
+    return n;
 }
 
 /**
@@ -41,14 +41,14 @@ int strrpl (char *str, Range<char> range, char to) {
  *
  *  @return amount of charactors replaced
  */
-int strrpl (char *str, SequenceList<char> list, char to) {
-	int i, n = 0, l = strlen (str);
-	for (i = 0; i < l; i++) {
-		if (list.in (str[i])) {
-			str[i] = to;
-		}
-	}
-	return n;
+int strrpl(char *str, SequenceList<char> list, char to) {
+    int i, n = 0, l = strlen(str);
+    for (i = 0; i < l; i++) {
+        if (list.in(str[i])) {
+            str[i] = to;
+        }
+    }
+    return n;
 }
 
 /**
@@ -60,15 +60,15 @@ int strrpl (char *str, SequenceList<char> list, char to) {
  *
  *  @return amount of charactors replaced
  */
-int strrpln (char *str, Range<char> range, char to) {
-	int i, n = 0, l = strlen (str);
-	for (i = 0; i < l; i++) {
-		if (!range.in (str[i])) {
-			str[i] = to;
-			n++;
-		}
-	}
-	return n;
+int strrpln(char *str, Range<char> range, char to) {
+    int i, n = 0, l = strlen(str);
+    for (i = 0; i < l; i++) {
+        if (!range.in(str[i])) {
+            str[i] = to;
+            n++;
+        }
+    }
+    return n;
 }
 
 /**
@@ -80,14 +80,14 @@ int strrpln (char *str, Range<char> range, char to) {
  *
  *  @return amount of charactors replaced
  */
-int strrpln (char *str, SequenceList<char> list, char to) {
-	int i, n = 0, l = strlen (str);
-	for (i = 0; i < l; i++) {
-		if (!list.in (str[i])) {
-			str[i] = to;
-		}
-	}
-	return n;
+int strrpln(char *str, SequenceList<char> list, char to) {
+    int i, n = 0, l = strlen(str);
+    for (i = 0; i < l; i++) {
+        if (!list.in(str[i])) {
+            str[i] = to;
+        }
+    }
+    return n;
 }
 
 /**
@@ -97,17 +97,17 @@ int strrpln (char *str, SequenceList<char> list, char to) {
  *
  *  @return amount of charactors deleted
  */
-int strtrm (char *str) {
-	char *p;
-	int n = 0;
-	for (p = str; *str != '\0'; str++) {
-		if (*str != ' ' && *str != '\t') {
-			* (p++) = *str;
-		} else {
-			n++;
-		}
-	}
-	*p = '\0';
-	return n;
+int strtrm(char *str) {
+    char *p;
+    int n = 0;
+    for (p = str; *str != '\0'; str++) {
+        if (*str != ' ' && *str != '\t') {
+            * (p++) = *str;
+        } else {
+            n++;
+        }
+    }
+    *p = '\0';
+    return n;
 }
 #endif
